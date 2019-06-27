@@ -5,8 +5,10 @@
 *****************************/
 
 // get a reference to the calculate button
-let button = document.getElementById("calculate-button");
+let calculateButton = document.getElementById("calculate-button");
 
+// points to list of products on page 
+let products = document.getElementsByClassName("product");
 
 /*****************************
         
@@ -15,68 +17,61 @@ let button = document.getElementById("calculate-button");
 *****************************/
 
 //create event to occur when that button is clicked
-button.onclick = function () {
+calculateButton.onclick = function () 
+{
 
-  console.log("button clicked")
+  // products will equal collection of all "product" class divs pn document
+  let products = document.querySelectorAll(".product");
 
-  // points to the element containing price in DOM
-  let price = document.getElementById("price");
+  // will hold sum of total from each row
+  let total = 0; 
 
-  // points to the input to get the amount the user typed in later on
-  let quantity = document.querySelector("input");
+  for (let i = 0; i < products.length; i++)
+  {
 
-  // show myself the value inside both the above elements to make sure its what i expect
-  console.log(quantity.value);
-  console.log(Number(price.innerText));
+      // search the current product , 1st child (Price), and its inner text and save it as Number
+      let price = Number(products[i].children[1].innerText);
+      console.log("Price is: "+ price);
 
-  //calculate total price and hold it in variable
-  let totalPrice = parseFloat(price.innerText).toFixed(2) * parseFloat(quantity.value).toFixed(2);
-  console.log(totalPrice);
+      // search the current product , 
+      //2nd child ([0] is <label> QTY </label> / [1] is <input>) ,
+      // the [1] (second) child within the child to get input text box value
+      let quantity = Number(products[i].children[2].children[1].value);
+      console.log("Quantity is: "+quantity);
 
-  // points to the element that shows the total shown to user 
-  let totalCostShownToUser = document.querySelector("#total");
+      let totalPrice = parseFloat(price).toFixed(2) * parseFloat(quantity).toFixed(2);
+      console.log("Total Price calculation: "+ totalPrice);
 
-  console.log(totalCostShownToUser);
+      total += totalPrice;
 
-  // display total cost to the user
-  totalCostShownToUser.innerHTML = String(totalPrice);
+      // make it round to 2 decimal places
+      let editedFinalPrice = totalPrice.toFixed(2);
 
-}
+      // have something to point to total cost column user can see
+      // the value will be <span id=total>  </span>
+      let totalCostShownToUser = products[i].children[3].children[0];
+      console.log(totalCostShownToUser);
 
+      // display the calculated price inside the total price column the user swees
+      totalCostShownToUser.innerHTML = editedFinalPrice;
 
-function createQuantityInput() {
+    
 
-}
-
-function createDeleteButton() {
-
-}
-
-function createQuantityNode() {
-
-}
-
-function createItemNode(dataType, itemData) {
-
-}
-
-function createNewItemRow(itemName, itemUnitPrice) {
+  }
+      // point to html where we want to display the total
+      document.querySelector("#final-total span").innerHTML = total;
 
 }
 
-function createNewItem() {
+var deleteButtons = document.getElementsByClassName('btn-delete');
 
+// loop throguh delete buttons to attatch deleteItem function to them dynamically
+for(var i =0; i < deleteButtons.length;i++)
+{
+  deleteButtons[i].onclick = deleteItem;
 }
 
-// window.onload = function(){
-//   var calculatePriceButton = document.getElementById('calc-prices-button');
-//   var createItemButton = document.getElementById('new-item-create');
-//   var deleteButtons = document.getElementsByClassName('btn-delete');
-
-//   // // calculatePriceButton.onclick = getTotalPrice;
-//   // createItemButton.onclick = createNewItem;
-
-//   // for(var i = 0; i<deleteButtons.length ; i++){
-//   //   deleteButtons[i].onclick = deleteItem;
-//   // }
-// };
+function deleteItem (e)
+{
+  e.currentTarget.p
+}

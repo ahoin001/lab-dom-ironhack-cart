@@ -59,8 +59,9 @@ input {
   justify-content: space-evenly;
 
   padding: 20px 0;
+  margin: 15px 0;
 
-  border: 1px solid red;
+  /* border: 1px solid red; */
 }
 
 /* Container of calculate button */
